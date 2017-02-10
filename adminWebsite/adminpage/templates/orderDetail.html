@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block title_name %}Order detail{% endblock %}
+
+{% block body %}
+
+<div class="welcome">
+  <h1>Order #{{order.pk|stringformat:"09d"}}</h1>
+</div>
+
+<div class="pagedir">
+  <h5>
+
+    {% if order.status == "billing" %}
+      <a href="{% url 'adminpage:admin_billing' %}">Billing Orders</a>
+    {% else %}{% if order.status == "complete" %}
+      <a href="{% url 'adminpage:admin_archive' %}">Order Archive</a>
+    {% else %}
+      <a href="{% url 'adminpage:admin_home' %}">Pending Orders</a>
+    {% endif %}{% endif %}
+     &nbsp;>&nbsp; Order Detail
+  </h5>
+</div>
+
+<div class="container" id="notifications">
+  {{message | safe}}
+</div>
+
+<div class="container">
+  <div class="alert alert-warning alert-dismissable fade in">
+    <strong>Current Order Status: </strong> {{order.get_status_display}}
+  </div>
+</div>
+
+<div class="container"><h4>Order Progress: </h4>
+  <div class="progress" style="height: 20px">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="16"
+    aria-valuemin="0" aria-valuemax="100" style='width:{{progress}}; background-color: #cF9020'>
+      {{order.get_status_display}}
+    </div>
+  </div>
+</div>
+
+<div class="container">
+<div class="row justify-content-md-center">
+
+
+  <div class="col col-md-4 col-lg-4"><br>
+    <div class="panel panel-default col-sm-14 col-md-14 col-lg-14">
+    <div class="panel-heading"><center>Status Management</center></div>
+      <div class="panel-body"><h5><strong> &nbsp; &nbsp; Current Status: </strong><u>{{order.get_status_display}}</u></h5></div>
+    <div class="form">
+      <form method='post' action="" id="statusForm">{% csrf_token %}
+          
+        {% for radio in status_form.status %}
+        <label class="radio">
+          {{ radio.tag }}<span class="outer"><span class="inner"></span></span>{{ radio.choice_label }}
+        </label>
+        {% endfor %}
+        <input type="hidden" id="lastnote" name="notes" value="123">
+        <br><br><center><input class="btn btn-default btn-lg" type='submit' value='Change'/></center>
+      </form>
+    </div>
+    </div>
+  </div>
+
+  <div class="col col-md-8 col-lg-8"><br>
+    <div id="panel">
+
+      <div class="panel panel-default col-sm-14 col-md-14 col-lg-14">
+
+        <div class="panel-heading">Customer Name</div>
+        <div class="panel-body">
+          <p>Order Number: #{{order.pk|stringformat:"09d"}} | Submit Time: {{order.date_time}}</p>
+        </div>
+
+        <table class="table">
+          <tr>
+            <th>Brand Name</th>
+            <th>Generic Name</th>
+            <th>Package Quantity</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+
+          {% if drug_set %}
+            
+            {% for drug in drug_set %}
+            <tr>  
+                <td>{{drug.brand}}</td>
+                <td>{{drug.name}}</td>
+                <td>{{drug.strength}}</td>
+                <td>{{drug.quantity}}</td>
+                <td>$xx.xx</td>
+            </tr>
+            {% endfor %}
+
+          {% else %}
+            <tr>
+              <td>&nbsp;</td>
+              <td><h3>---Data---</h3></td>
+              <td><h3>---Might---</h3></td>
+              <td><h3>---Lost---</h3></td>
+            <td>&nbsp;</td>
+            </tr>
+          {% endif %}
+
+          <tr>
+            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+            <td>Total:</td>
+            <td>$xx.xx</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+          </tr>
+        </table>
+
+        <div class="buttons">
+          <a href="#" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-edit"></span> Edit Order
+          </a>
+        </div>
+
+      </div>
+
+    </div> 
+  </div>
+
+  
+
+</div>
+</div>
+
+<script type="text/javascript">
+
+  $('#statusForm').submit(function() {
+
+    var result = confirm("Click OK to continue?");
+    if (result == true) {
+      if ("{{order.status}}" == getRadioVal(document.getElementById("statusForm"), "status")) {
+        $('#notifications').prepend(
+            '<div class="alert alert-danger alert-dismissable fade in">\
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\
+                <strong>FAILED: </strong> Can not change to the same status!\
+            </div>');
+        return false;
+      }
+      $('#lastnote').val($('#notifications').html());
+    }
+    return result;
+
+  });
+
+  $(document).ready(function() {
+
+    if ("{{change_succeed}}" == "true") {
+      $('#notifications').prepend(
+          '<div class="alert alert-success alert-dismissable fade in">\
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\
+            <strong>SUCCESS: </strong> The status for this order has been changed successfully!\
+          </div>');
+    }
+
+  });
+
+</script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

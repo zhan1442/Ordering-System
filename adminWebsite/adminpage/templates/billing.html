@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block billing_active %}active{% endblock %}
+{% block title_name %}Billing Page{% endblock %}
+
+
+{% block body %}
+
+<div class="welcome">
+  <h1>Billing/Invoicing</h1>
+</div>
+  
+{% include 'order_panel.html' with status_name="Order Delivered" orders=billing_orders only %}
+
+{% endblock %}

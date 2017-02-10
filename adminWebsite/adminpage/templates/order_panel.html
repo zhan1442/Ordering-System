@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-lg-15 col-md-15"><center>
+      <div id="panel">
+      <div class="panel panel-default col-md-13 col-lg-13">
+        <div class="panel-heading">{{ status_name }}</div>
+        <div class="panel-body"></div>
+
+        <table class="table">
+          <tr>
+            <th>Customer Name</th>
+            <th>Date Submitted</th>
+            <th>Order Number</th>
+          </tr>
+
+          {% if orders %}
+          {% for order in orders %}
+
+          <tr onclick="window.location='{% url 'adminpage:admin_orderDetail' order.pk %}'" class="notHeader" >
+            <td>{{order.client_obj.client_name}}</td>
+            <td>{{order.date_time}}</td>
+            <td>No. # {{order.pk|stringformat:"09d"}}</td>
+          </tr>
+
+          {% endfor %}
+          {% else %}
+          <tr class="notHeader">
+            <td></td>
+            <td>There is no order in this catergory.</td>
+            <td></td>
+          </tr>
+          {% endif %}
+        </table>
+      </div>
+      </div></center>
+    </div>
+  </div>
+</div>
