@@ -28,26 +28,28 @@
 
 <div class="container">
   <div class="alert alert-warning alert-dismissable fade in">
-    <strong>Current Order Status: </strong> {{order.get_status_display}}
-  </div>
-</div>
-
-<div class="container"><h4>Order Progress: </h4>
-  <div class="progress" style="height: 20px">
-    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="16"
-    aria-valuemin="0" aria-valuemax="100" style='width:{{progress}}; background-color: #cF9020'>
-      {{order.get_status_display}}
-    </div>
+    <strong>Last Update: </strong> Order status was changed to {{order.get_status_display}}
   </div>
 </div>
 
 <div class="container">
-<div class="row justify-content-md-center">
+<h4>Order Progress: </h4>
+  <div class="progress" style="height: 22px">
+    <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="16"
+    aria-valuemin="0" aria-valuemax="100" style='width:{{progress}}; background-color: #cF9020; font-size:15px;'>
+      {{order.get_status_display}}
+    </div>
+  </div>
+
+</div>
+
+<div class="container">
+<div class="row justify-content-md-center" style="margin-left: -1.3%; margin-right: -1.3%;">
 
 
   <div class="col col-md-4 col-lg-4"><br>
     <div class="panel panel-default col-sm-14 col-md-14 col-lg-14">
-    <div class="panel-heading"><center>Status Management</center></div>
+    <div class="panel-heading"><h4><center>Status Management</center></h4></div>
       <div class="panel-body"><h5><strong> &nbsp; &nbsp; Current Status: </strong><u>{{order.get_status_display}}</u></h5></div>
     <div class="form">
       <form method='post' action="" id="statusForm">{% csrf_token %}
@@ -57,7 +59,7 @@
           {{ radio.tag }}<span class="outer"><span class="inner"></span></span>{{ radio.choice_label }}
         </label>
         {% endfor %}
-        <input type="hidden" id="lastnote" name="notes" value="123">
+        <input type="hidden" id="lastnote" name="notes" value="">
         <br><br><center><input class="btn btn-default btn-lg" type='submit' value='Change'/></center>
       </form>
     </div>
@@ -69,9 +71,11 @@
 
       <div class="panel panel-default col-sm-14 col-md-14 col-lg-14">
 
-        <div class="panel-heading">Customer Name</div>
+        <div class="panel-heading"><h4><center>Order Info</center></h4></div>
         <div class="panel-body">
-          <p>Order Number: #{{order.pk|stringformat:"09d"}} | Submit Time: {{order.date_time}}</p>
+          <p><strong>Customer Name:</strong> {{order.client_obj.client_name}}</p>
+          <strong>Order Number:</strong> #{{order.pk|stringformat:"09d"}} &nbsp; | &nbsp; 
+          <strong>Submit Time:</strong> {{order.date_time}}
         </div>
 
         <table class="table">
@@ -97,11 +101,7 @@
 
           {% else %}
             <tr>
-              <td>&nbsp;</td>
-              <td><h3>---Data---</h3></td>
-              <td><h3>---Might---</h3></td>
-              <td><h3>---Lost---</h3></td>
-            <td>&nbsp;</td>
+              <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
             </tr>
           {% endif %}
 
@@ -116,9 +116,11 @@
         </table>
 
         <div class="buttons">
-          <a href="#" class="btn btn-default btn-lg">
-            <span class="glyphicon glyphicon-edit"></span> Edit Order
-          </a>
+          <center>
+            <a href="#" class="btn btn-default btn-lg" id="editbtn">
+              <span class="glyphicon glyphicon-edit"></span> Edit Order
+            </a>
+          </center>
         </div>
 
       </div>
@@ -162,6 +164,8 @@
     }
 
   });
+
+  
 
 </script>
 

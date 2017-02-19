@@ -9,7 +9,9 @@
 <div class="welcome">
 <h1>Order Archive</h1>
 </div>
-  
-{% include 'order_panel.html' with status_name="Billing Complete" orders=archive_orders only %}
+
+{% include 'searchbar.html' %}
+
+{% include 'order_panel.html' with status_name="Billing Complete" orders=archive_orders p_direction="up" only %}
 
 {% endblock %}

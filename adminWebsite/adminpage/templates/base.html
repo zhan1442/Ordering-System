@@ -25,16 +25,14 @@
 
     <!--header-->
 
-    <div class="header">
-      <ul class="hello">
-        <li> <a href="#"><h3>   &nbsp;&nbsp;&nbsp;Logout<h3></a></li>
-        <li> <h3>Hello, Mr Example</h3></li>
-      </ul>
-    </div>
+    
 
     <div class="biggerHeader">
+      <div class="hello">
+        <h4>Hello, Mr Example&nbsp;&nbsp;&nbsp;<span><a href="#">Logout</a></span></h4>
+      </div>
       <img src="{% static 'img/pharmLogo.png' %}" width="200" height="100">
-      <h1>Pharmacy Ordering System</h1>
+      <h1>Pharmacy Ordering System</h1><br>
     </div>
 
     <nav class="navbar navbar-inverse">
@@ -63,6 +61,11 @@
 
     {% block body %}
     {% endblock %}
+
+    <!-- side bar -->
+    <div class="fixed-sidebar">
+      
+    </div>
 
     <!-- footer-->
     

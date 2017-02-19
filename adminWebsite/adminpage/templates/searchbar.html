@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="input-group col-md-12">
+      <span class="input-group-btn">
+        <button class="btn" style="background-color:#AF8020;">
+          <span class="glyphicon glyphicon-search" style="color:white;"></span>
+        </button>
+      </span>
+      <input id="qfield" type="text" class="search-query form-control" placeholder=" Search for Orders .." />
+      <span class="input-group-btn">
+          <div class="dropdown" >
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color:#AF8020;">
+              &nbsp;&nbsp;<span id="filterOption" style="color:white;">By Name</span>&nbsp;&nbsp;
+              <span class="caret" style="color:white;"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a id="byname">By Name</a></li>
+              <li><a id="byno">By No. #&nbsp;</a></li>
+              <li><a id="bydate">By Date&nbsp;&nbsp;</a></li>
+            </ul>
+          </div>
+      </span>
+    </div>
+  </div>
+</div>
+<br>
+
+<script type="text/javascript">
+
+  $(document).on('click', 'ul.dropdown-menu a', function(e){
+    $('#filterOption').text($(this).text());
+  });
+
+  $(document).on('keyup', '#qfield', function(){
+    var q = $(this).val().toUpperCase();
+
+    $('.panel-heading span.order-span i.glyphicon-chevron-down').each(function() {
+      var $this = $(this);
+      $this.parents('.panel').find('.panel-body').slideDown(150);
+      $this.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+    });
+
+    $('table tr.notHeader').each(function(index) {
+      var $this = $(this);
+      
+      var id = $this.find("td:eq(0)").text().toUpperCase();
+      if ($('#filterOption').text() == $('#byno').text()) {
+        id = $this.find("td:eq(2)").text().toUpperCase();
+      } else if ($('#filterOption').text() == $('#bydate').text()) {
+        id = $this.find("td:eq(1)").text().toUpperCase();
+      }
+
+      if (id.indexOf(q) > -1) $this.show();
+      else $this.hide();
+    });
+
+  });
+
+</script>
