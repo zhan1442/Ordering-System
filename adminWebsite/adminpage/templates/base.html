@@ -11,12 +11,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
   <!-- custom styles -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/pharmHomestylesheet.css' %}"  media="all"/>
   <script type="text/javascript" src="{% static 'js/customs.js' %}"></script>
+
+  {% block more_style %}{% endblock %}
 
   <title>{% block title_name %}{% endblock %}</title>
 </head>
@@ -57,6 +57,11 @@
       </div>
     </nav>
 
+    <div class="welcome container">
+      <h1>{% block head %}{% endblock %}</h1>
+    </div>
+    <br>
+
     <!-- End Header -->
 
     {% block body %}
@@ -69,15 +74,12 @@
 
     <!-- footer-->
     
-    <div class="panel panel-default">
-      <div class="panel-body"></div>
       <div class="panel-footer col-sm-12 col-md-12 col-lg-12">
             <!-- links at the bottom of the page that redirect users who are lost -->
             <p> <a href="https://www.purdue.edu/rx/">Purdue University Retail Pharmacy</a> |
          <a href="http://www.purdue.edu/"> Purdue University </a> |
          <a href="https://www.pharmacy.purdue.edu/"> Purdue University College of Pharmacy </a> </p>
       </div>
-    </div>
 
 
   </div>

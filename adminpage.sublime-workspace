@@ -1,0 +1,600 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"H",
+				"HttpResponse\tclass"
+			],
+			[
+				"btn",
+				"btnremove"
+			],
+			[
+				"Dr",
+				"Drug_form\tclass"
+			],
+			[
+				"drug",
+				"druglist"
+			],
+			[
+				"st",
+				"strength"
+			],
+			[
+				"b",
+				"brand"
+			],
+			[
+				"dr",
+				"drug_pk\tstatement"
+			],
+			[
+				"lo",
+				"loads\tfunction"
+			],
+			[
+				"pt",
+				"PUT"
+			],
+			[
+				"re",
+				"request\tparam"
+			],
+			[
+				"l",
+				"loads\tfunction"
+			],
+			[
+				"htt",
+				"HttpResponse\tclass"
+			],
+			[
+				"de",
+				"device-width"
+			],
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"get",
+				"get_object_or_404\tfunction"
+			],
+			[
+				"padd",
+				"padding-left"
+			],
+			[
+				"pad",
+				"padding-right"
+			],
+			[
+				"pa",
+				"padding-right"
+			],
+			[
+				"ma",
+				"margin-right"
+			],
+			[
+				"by",
+				"byno"
+			],
+			[
+				"fun",
+				"fun\tFunction"
+			],
+			[
+				"fil",
+				"filterOption"
+			],
+			[
+				"c",
+				"color"
+			],
+			[
+				"pull",
+				"pull-right"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"for",
+				"ForeignKey"
+			],
+			[
+				"client",
+				"client_obj"
+			],
+			[
+				"no",
+				"notifications"
+			],
+			[
+				"va",
+				"value"
+			],
+			[
+				"d",
+				"document"
+			],
+			[
+				"change",
+				"change_succeed\tstatement"
+			],
+			[
+				"ge",
+				"getElementById"
+			],
+			[
+				"sta",
+				"status"
+			],
+			[
+				"onc",
+				"onclick\tAttr"
+			],
+			[
+				"pro",
+				"progress-bar"
+			],
+			[
+				"P",
+				"POST"
+			],
+			[
+				"model",
+				"ModelForm\tclass"
+			],
+			[
+				"status",
+				"status_form\tstatement"
+			],
+			[
+				"Or",
+				"ORDER_STATUS_CHOICES\tstatement"
+			],
+			[
+				"ra",
+				"RadioSelect\tclass"
+			],
+			[
+				"cho",
+				"ChoiceField\tclass"
+			],
+			[
+				"F",
+				"Form\tclass"
+			],
+			[
+				"mo",
+				"ModelForm\tclass"
+			],
+			[
+				"fo",
+				"forms\tmodule"
+			],
+			[
+				"class",
+				"class\tkeyword"
+			],
+			[
+				"order",
+				"order_num"
+			],
+			[
+				"o",
+				"objects"
+			],
+			[
+				"def",
+				"def\tFunction"
+			],
+			[
+				"contex",
+				"context\tparam"
+			],
+			[
+				"B",
+				"BASE_DIR\tstatement"
+			],
+			[
+				"n",
+				"now\tfunction"
+			],
+			[
+				"max",
+				"max_length"
+			],
+			[
+				"ch",
+				"choices"
+			],
+			[
+				"v",
+				"views\tmodule"
+			],
+			[
+				"se",
+				"self"
+			],
+			[
+				"date",
+				"DateTimeField\tclass"
+			],
+			[
+				"mda",
+				"mdatetime\tDateTimeField (mdatetime)"
+			],
+			[
+				"mau",
+				"mauto\tAutoField (mauto)"
+			],
+			[
+				"md",
+				"mdatetime\tDateTimeField (mdatetime)"
+			],
+			[
+				"tx",
+				"TextField\tclass"
+			],
+			[
+				"cl",
+				"Client\tclass"
+			],
+			[
+				"i",
+				"import\tkeyword"
+			],
+			[
+				"m",
+				"models\tmodule"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "adminWebsite/adminpage/templates/ManageProducts.html",
+			"settings":
+			{
+				"buffer_size": 22813,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "adminWebsite/adminpage/templates/orderEdit.html",
+			"settings":
+			{
+				"buffer_size": 3645,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "pa",
+		"selected_items":
+		[
+			[
+				"pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"a",
+				"Anaconda: Show error list"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: Install Package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/Roger/Desktop/epics",
+		"/Users/Roger/Desktop/epics/adminWebsite",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static/bootstrap3-editable",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static/bootstrap3-editable/css",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static/css",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static/js",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/templates"
+	],
+	"file_history":
+	[
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/templates/order_panel.html",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/views.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/forms.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/urls.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/models.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/templates/ManageProducts.html",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static/js/customs.js",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/templates/billing.html",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/templates/orderEdit.html",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/templates/orderDetail.html",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static/css/pharmHomestylesheet.css",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/templates/searchbar.html",
+		"/Users/Roger/Desktop/epics/lib/python2.7/site-packages/django/contrib/admin/static/admin/js/vendor/jquery/jquery.js",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/templates/pharmHome.html",
+		"/Users/Roger/Desktop/epics/lib/python2.7/site-packages/django/http/response.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static/css/edit.css",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/templates/base.html",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static/bootstrap3-editable/css/bootstrap-editable.css",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/templates/archive.html",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/apps.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/admin.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static/css/style.css",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static/css/editstylesheet.css",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/static/css/pharmManageProductsstylesheet.css",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminWebsite/urls.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/templates/order_table.html",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminpage/tests.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/adminWebsite/settings.py",
+		"/Users/Roger/Desktop/epics/lib/python2.7/site-packages/django/contrib/admin/options.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/admin/admin.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/admin/models.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/admin/urls.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/admin/views.py",
+		"/Users/Roger/Desktop/epics/adminWebsite/admin/apps.py",
+		"/Users/Roger/Desktop/epics/lib/python2.7/site-packages/django/contrib/admin/static/admin/js/vendor/xregexp/xregexp.js",
+		"/Users/Roger/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/Roger/Desktop/epics/lib/python2.7/site-packages/django/db/models/fields/__init__.py",
+		"/Users/Roger/Desktop/epics/drugorder/client/models.py",
+		"/Users/Roger/Desktop/epics/lib/python2.7/site-packages/django/forms/fields.py",
+		"/Users/Roger/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+		"/Users/Roger/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-mousemap",
+		"/Users/Roger/Library/Application Support/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+		"/Users/Roger/Library/Application Support/Sublime Text 3/Packages/User/Plain text.sublime-settings",
+		"/Users/Roger/Library/Application Support/Sublime Text 3/Packages/User/Python.sublime-settings",
+		"/Users/Roger/Desktop/epics/adminpage.sublime-workspace"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"under",
+			"h1",
+			"  \n",
+			"page",
+			"overflow",
+			"table",
+			"container",
+			"panel",
+			"hr",
+			"h'r",
+			"notheader",
+			"}\n",
+			"width",
+			"style",
+			"hr",
+			"\"><",
+			" &",
+			"center",
+			"Current",
+			"readonly"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "adminWebsite/adminpage/templates/ManageProducts.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 22813,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5572.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "adminWebsite/adminpage/templates/orderEdit.html",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3645,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1135.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "adminpage.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 242.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

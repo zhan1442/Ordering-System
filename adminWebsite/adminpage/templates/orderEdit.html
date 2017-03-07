@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title_name %}Order revision{% endblock %}
+{% block head %}Edit Order #{{order.pk|stringformat:"09d"}}{% endblock %}
+
+{% block more_style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap3-editable/css/bootstrap-editable.css' %}">
+    <script type="text/javascript" src="{% static 'bootstrap3-editable/js/bootstrap-editable.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/edit.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container" style="margin-top:-12px; padding-left:5px;">
+  <h5>
+    {% if order.status == "billing" %}
+      <a href="{% url 'adminpage:admin_billing' %}">Billing Orders</a>
+    {% else %}{% if order.status == "complete" %}
+      <a href="{% url 'adminpage:admin_archive' %}">Order Archive</a>
+    {% else %}
+      <a href="{% url 'adminpage:admin_home' %}">Pending Orders</a>
+    {% endif %}{% endif %}
+     &nbsp;>&nbsp; <a href="{% url 'adminpage:admin_orderDetail' order.pk %}">Detail #{{order.pk|stringformat:"09d"}}</a>
+     &nbsp;>&nbsp; Revision
+  </h5>
+</div>
+<br>
+    
+<div class="container content" id='druglist'>
+
+    <h3 style="float:left;">Drug List:</h3>
+    <button style="float:right;"><i class="glyphicon glyphicon-plus"></i></button>
+
+{% for drug in drug_set %}
+  
+  <div style="clear:both; width:100%; height:30px;" class="item"><br>
+    <br>
+    <strong>Brand:</strong> <span class="revision" data-pk="{{drug.pk}}" data-name="brand" data-type="text">{{drug.brand}}</span>
+    <strong>Name:</strong> <span class="revision" data-pk="{{drug.pk}}" data-name="name" data-type="text">{{drug.name}}</span>
+    <strong>Strength:</strong> <span class="revision" data-pk="{{drug.pk}}" data-name="strength" data-type="text">{{drug.strength}}</span>
+    <strong>Quantity:</strong> <span class="revision" data-pk="{{drug.pk}}" data-name="quantity" data-type="number">{{drug.quantity}}</span>
+    <button data-pk="{{drug.pk}}" class="btn btn-default btn-sm btnremove" style="float:right;">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <br><hr><br>
+  </div>
+  
+{% endfor %}
+  <br><br><br>
+  <h3 style="clear:both;">Add Drug:</h3> 
+  <div id="form" style="clear:both;"><br>
+    <form method="post" action="" >{% csrf_token %}
+        <li style="display:inline;">{{form.as_p}}</li>
+        <input type="submit" value="Add">
+    </form>
+  </div>
+
+</div>
+
+{% csrf_token %}
+<script type="text/javascript">
+    //$.fn.editable.defaults.mode = 'inline';    
+
+    $('.revision').editable({
+        type:  'text',
+        placement: 'bottom',
+
+        url:   '{% url "adminpage:admin_revise" %}',  
+        title: 'Enter Brand Name',
+        ajaxOptions: {
+            type: 'PUT',
+            dataType: 'json',
+
+        },
+        
+        success: function(response, newValue) {
+            if(response.success != 'true') return response.msg; //msg will be shown in editable form
+        },
+        /*params: function(params) {
+            //originally params contain pk, name and value
+            params.a = 1
+            return params;
+        },*/
+    });
+
+    $(document).on('click', '.glyphicon-plus', function(e){
+        $this = $(this)
+
+
+
+    });
+
+    $(document).on('click', '.btnremove', function(e){
+        $this = $(this);
+        $.ajax({
+            url: '{% url "adminpage:admin_revise" %}',
+            type: 'delete',   
+            data: {'pk': $(this).data('pk')},
+            success: function function_name(result) {
+                         $this.parent('.item').fadeOut(300, function(){ $this.remove(); });
+                     },
+        });
+
+
+    });
+
+
+</script>
+
+{% endblock %}

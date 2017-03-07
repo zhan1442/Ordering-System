@@ -1,0 +1,26 @@
+{
+	"build_systems":
+	[
+		{
+			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+			"name": "Anaconda Python Builder",
+			"selector": "source.python",
+			"shell_cmd": "\"/Users/Roger/Desktop/epics/bin/python\" -u \"$file\""
+		}
+	],
+	"folders":
+	[
+		{
+			"path": "."
+		},
+		{
+			"path": "/Volumes/pharmord/OrderSystem/ordersysWebsite"
+		}
+	],
+	"settings":
+	[
+		{
+			"python_interpreter": "~/epics/bin/python"
+		}
+	]
+}

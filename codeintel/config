@@ -1,0 +1,7 @@
+{
+    "Python": {
+        "python": "/Users/Roger/Desktop/epics/bin/python",
+        "codeintel_scan_files_in_project": true,
+        "pythonExtraPaths": ["/Users/Roger/Desktop/epics/lib/python2.7/site-packages" ]
+    }
+}
