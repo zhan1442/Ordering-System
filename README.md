@@ -4,8 +4,6 @@ This is the early stage prototype implementing the design for Visual Team to vis
 
 The temporary website is now hosted on the determined EC2 sever, with the link:
 
-homepage: www.p-ordering.tk
-
 adminpage: admin.p-ordering.tk
 
 clientpage: client.p-ordering.tk
