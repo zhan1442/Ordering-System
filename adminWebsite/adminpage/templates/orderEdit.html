@@ -6,10 +6,12 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'bootstrap3-editable/css/bootstrap-editable.css' %}">
     <script type="text/javascript" src="{% static 'bootstrap3-editable/js/bootstrap-editable.min.js' %}"></script>
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link rel="stylesheet" href="{% static 'css/edit.css' %}">
 {% endblock %}
 
 {% block body %}
+{% load crispy_forms_tags %}
 
 <div class="container" style="margin-top:-12px; padding-left:5px;">
   <h5>
@@ -20,24 +22,30 @@
     {% else %}
       <a href="{% url 'adminpage:admin_home' %}">Pending Orders</a>
     {% endif %}{% endif %}
-     &nbsp;>&nbsp; <a href="{% url 'adminpage:admin_orderDetail' order.pk %}">Detail #{{order.pk|stringformat:"09d"}}</a>
-     &nbsp;>&nbsp; Revision
+    &nbsp;>&nbsp; 
+    <a href="{% url 'adminpage:admin_orderDetail' order.pk %}">
+        Detail #{{order.pk|stringformat:"09d"}}
+    </a>
+    &nbsp;>&nbsp; Revision
   </h5>
 </div>
 <br>
+
+<div class="container content" id="notifications" >
+</div>
     
 <div class="container content" id='druglist'>
-
+<!--
     <h3 style="float:left;">Drug List:</h3>
-    <button style="float:right;"><i class="glyphicon glyphicon-plus"></i></button>
+
 
 {% for drug in drug_set %}
   
   <div style="clear:both; width:100%; height:30px;" class="item"><br>
     <br>
-    <strong>Brand:</strong> <span class="revision" data-pk="{{drug.pk}}" data-name="brand" data-type="text">{{drug.brand}}</span>
-    <strong>Name:</strong> <span class="revision" data-pk="{{drug.pk}}" data-name="name" data-type="text">{{drug.name}}</span>
-    <strong>Strength:</strong> <span class="revision" data-pk="{{drug.pk}}" data-name="strength" data-type="text">{{drug.strength}}</span>
+    <strong>Brand:</strong> <span data-pk="{{drug.pk}}" data-name="brand" data-type="text">{{drug.brand}}</span>
+    <strong>Name:</strong> <span data-pk="{{drug.pk}}" data-name="name" data-type="text">{{drug.name}}</span>
+    <strong>Strength:</strong> <span data-pk="{{drug.pk}}" data-name="strength" data-type="text">{{drug.strength}}</span>
     <strong>Quantity:</strong> <span class="revision" data-pk="{{drug.pk}}" data-name="quantity" data-type="number">{{drug.quantity}}</span>
     <button data-pk="{{drug.pk}}" class="btn btn-default btn-sm btnremove" style="float:right;">
         <i class="glyphicon glyphicon-remove"></i>
@@ -46,16 +54,38 @@
   </div>
   
 {% endfor %}
-  <br><br><br>
-  <h3 style="clear:both;">Add Drug:</h3> 
-  <div id="form" style="clear:both;"><br>
-    <form method="post" action="" >{% csrf_token %}
-        <li style="display:inline;">{{form.as_p}}</li>
-        <input type="submit" value="Add">
-    </form>
+-->
+
+  <div class="container content" id="form" style="clear:both;"><br>
+    <div class="row">
+    <div class="center-block" style="width:820px;">
+      {% csrf_token %}
+      <legend>Add Drug Here <span id="loading"></span></legend>
+
+      {% crispy form %}
+      <small style="color:#666;">
+        You can add drug to this order from here. It will autocomplete for you to add drug.
+      </small>
+      <div id="form_message"></div>
+    </div>
+    </div>
+
+    <div class="row">
+      <div class="center-block" style="width:820px;">
+        <legend style="margin-top:30px;">Drug List Detail</legend>
+        {% include 'orderlist.html' with drug_set=drug_set only %}
+      </div>
+    </div>
+
   </div>
 
+  <div class="container content">
+  
+  </div>
+  
+
 </div>
+
 
 {% csrf_token %}
 <script type="text/javascript">
@@ -66,15 +96,19 @@
         placement: 'bottom',
 
         url:   '{% url "adminpage:admin_revise" %}',  
-        title: 'Enter Brand Name',
+        title: 'Enter Quantity Number',
         ajaxOptions: {
             type: 'PUT',
             dataType: 'json',
-
+            
         },
-        
         success: function(response, newValue) {
             if(response.success != 'true') return response.msg; //msg will be shown in editable form
+            $('#notifications').prepend(
+              '<div class="alert alert-success alert-dismissable fade in">\
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\
+                <strong>SUCCESS: </strong> The status for this order has been changed successfully!\
+              </div>');
         },
         /*params: function(params) {
             //originally params contain pk, name and value
@@ -83,28 +117,142 @@
         },*/
     });
 
-    $(document).on('click', '.glyphicon-plus', function(e){
-        $this = $(this)
+    /* $(document).on('click', '.glyphicon-plus', function(e){
+         $this = $(this)
 
-
-
-    });
+     });*/
 
     $(document).on('click', '.btnremove', function(e){
-        $this = $(this);
-        $.ajax({
-            url: '{% url "adminpage:admin_revise" %}',
-            type: 'delete',   
-            data: {'pk': $(this).data('pk')},
-            success: function function_name(result) {
-                         $this.parent('.item').fadeOut(300, function(){ $this.remove(); });
-                     },
-        });
-
-
+        var result = confirm("Are you sure to continue?");
+        if (result == true) {
+          $this = $(this);
+          $.ajax({
+              url: '{% url "adminpage:admin_revise" %}',
+              type: 'delete',   
+              data: {'pk': $(this).data('pk')},
+              success: function function_name(result) {
+                           $this.closest('.item').fadeOut(300, function(){ $this.remove(); });
+                       },
+          });
+        }
     });
 
 
 </script>
+
+<!-- auto complete functions -->
+{% load static %}
+<script type="text/javascript" src="{% static 'js/jquery.autocomplete.js' %}"></script>
+<script type="text/javascript">
+
+  $('input').on('keyup', function(){
+    if ($(this).val() == "" && $(this).attr('id') != "id_strength") {
+      $('#form_message').html("");
+    }
+  });
+
+  function showloading() {
+    $('#loading').html('<img src="{% static "img/loading.gif" %}" style="width:20px;height:20px;">');
+  }
+
+  $('#id_brand').autocomplete({
+    serviceUrl: '{% url "adminpage:admin_autoDruglist" %}',
+    noCache: true,
+    minChars: 1,
+    onSelect: function (suggestion) {},//add tasks here for selection
+    onSearchStart: function (query) {
+      showloading();
+      query.name = $('#id_name').val();
+    },
+    onSearchComplete: function (query, suggestions) {
+      $('#loading').html('');
+      if(suggestions.length == 0) {// give feedback...
+        $('#form_message').html("<p style='margin-top: 10px;'>\
+                                <i class='glyphicon glyphicon-exclamation-sign'></i> Brand suggestions: No matached brand with current restrictions.\
+                                <br>&emsp;&emsp;<i class='glyphicon glyphicon-arrow-right'></i> \
+                                Brand contains: <u>" + $('#id_brand').val() +
+                                "</u><br>&emsp;&emsp;<i class='glyphicon glyphicon-arrow-right'></i> Name is: <u>" + $('#id_name').val() + "</u></p>");
+      } else {
+        $('#form_message').html("");
+      }
+    },
+    params: {
+      'field': 'brand',
+    },
+  });
+
+  $('#id_name').autocomplete({
+    serviceUrl: '{% url "adminpage:admin_autoDruglist" %}',
+    noCache: true,
+    minChars: 1,
+    onSearchStart: function (query) {
+      showloading();
+      query.brand = $('#id_brand').val();
+    },
+    onSearchComplete: function (query, suggestions) {
+      $('#loading').html('');
+      if(suggestions.length == 0) {
+        $('#form_message').html("<p style='margin-top: 10px;'>\
+                                <i class='glyphicon glyphicon-exclamation-sign'></i> Name suggestions: No matached name with current restrictions.\
+                                <br>&emsp;&emsp;<i class='glyphicon glyphicon-arrow-right'></i> \
+                                Brand is: <u>" + $('#id_brand').val() +
+                                "</u><br>&emsp;&emsp;<i class='glyphicon glyphicon-arrow-right'></i> Name contains: <u>" + 
+                                $('#id_name').val() + "</u></p>");
+      } else {
+        $('#form_message').html("");
+      }
+    },
+    params: {
+      'field': 'name',
+    },
+  });
+
+  $('#id_strength').autocomplete({
+    serviceUrl: '{% url "adminpage:admin_autoDruglist" %}',
+    noCache: true,
+    minChars: 0,
+    onSearchStart: function (query) {
+      showloading();
+      query.brand = $('#id_brand').val();
+      query.name = $('#id_name').val();
+    },
+    onSearchComplete: function (query, suggestions) {
+      $('#loading').html('');
+      if(suggestions.length == 0) {
+        if ($('#id_brand').val() == "" || $('#id_name').val() == "") {
+          var remind_message = "<br>&emsp;&emsp;<i class='glyphicon glyphicon-arrow-right'></i> " +
+                               "Please fill both brand and name to get strength suggestions.";
+        } else if (query == "") {
+          var remind_message =  "No matached strength with current restrictions." +
+                                "<br>&emsp;&emsp;<i class='glyphicon glyphicon-arrow-right'></i> Brand is: <u>" + $('#id_brand').val() +
+                                "</u><br>&emsp;&emsp;<i class='glyphicon glyphicon-arrow-right'></i> Name is: <u>" + $('#id_name').val();
+        } else {
+          var remind_message = "<br>&emsp;&emsp;<i class='glyphicon glyphicon-arrow-right'></i>No match contains strength input: <u>" + 
+                                query + "</u>";
+        }
+        $('#form_message').html("<p style='margin-top: 10px;'>\
+                                <i class='glyphicon glyphicon-exclamation-sign'></i> Strength Suggestions: " +
+                                remind_message + "</p>");
+      } else {
+        $('#form_message').html("");
+      }
+    },
+    params: {
+      'field': 'strength',
+    },
+  });
+
+</script>
+
+<style type="text/css">
+  .autocomplete-suggestions { border: 1px solid #DDD; background: #FFF; overflow: auto; }
+  .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+  .autocomplete-selected { background: #F0F0F0; }
+  .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+  .autocomplete-group { padding: 2px 5px; }
+  .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+  .glyphicon-exclamation-sign  { color: #B0C4DE; }
+  .glyphicon-arrow-right { color: #B0C4DE; }
+</style>
 
 {% endblock %}

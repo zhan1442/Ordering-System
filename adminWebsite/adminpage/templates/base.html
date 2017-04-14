@@ -6,21 +6,30 @@
   <meta name="viewport" content="width = device-width, initial-scale = 1">
   {% load static %}
   <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  <!-- radio form -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+  <!-- table styles -->
+  <link rel="stylesheet" href="{% static 'css/bluetable.css' %}">
+  {% block more_style %}{% endblock %}
   <!-- custom styles -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/pharmHomestylesheet.css' %}"  media="all"/>
   <script type="text/javascript" src="{% static 'js/customs.js' %}"></script>
 
-  {% block more_style %}{% endblock %}
+
+
+  
 
   <title>{% block title_name %}{% endblock %}</title>
 </head>
+<!--
+<body style="background-image: url({% static '/img/aaa.jpg' %} ); background-size:cover; background-position:center center;">
+-->
 <body>
+
   <div class="page">
 
     <!--header-->
@@ -29,7 +38,7 @@
 
     <div class="biggerHeader">
       <div class="hello">
-        <h4>Hello, Mr Example&nbsp;&nbsp;&nbsp;<span><a href="#">Logout</a></span></h4>
+        <h4>Hello, Mr {{user.first_name}}&nbsp;&nbsp;&nbsp;<span><a href="{% url 'logout' %}">Logout</a></span></h4>
       </div>
       <img src="{% static 'img/pharmLogo.png' %}" width="200" height="100">
       <h1>Pharmacy Ordering System</h1><br>
@@ -49,9 +58,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="{% block home_active %}{% endblock %}"><a href="{% url 'adminpage:admin_home' %}">Pending Orders</a></li>
-            <li class="{% block manage_active %}{% endblock %}"><a href="#">Manage Products</a></li>
-            <li class="{% block billing_active %}{% endblock %}"><a href="{% url 'adminpage:admin_billing' %}">Billing</a></li>
-            <li class="{% block archive_active %}{% endblock %}"><a href="{% url 'adminpage:admin_archive' %}">Archive</a></li>
+            <li class="{% block billing_active %}{% endblock %}"><a href="{% url 'adminpage:admin_billing' %}">Billing Orders</a></li>
+            <li class="{% block archive_active %}{% endblock %}"><a href="{% url 'adminpage:admin_archive' %}">Archive Orders</a></li>
+            <li class="{% block manage_active %}{% endblock %}"><a href="{% url 'adminpage:admin_manageProducts' %}">Manage Products</a></li>
+            <li><a href="../userManage">Manage Users</a></li>
           </ul>
         </div>
       </div>
@@ -74,12 +84,13 @@
 
     <!-- footer-->
     
-      <div class="panel-footer col-sm-12 col-md-12 col-lg-12">
-            <!-- links at the bottom of the page that redirect users who are lost -->
-            <p> <a href="https://www.purdue.edu/rx/">Purdue University Retail Pharmacy</a> |
-         <a href="http://www.purdue.edu/"> Purdue University </a> |
-         <a href="https://www.pharmacy.purdue.edu/"> Purdue University College of Pharmacy </a> </p>
-      </div>
+    <div class="panel-footer col-sm-12 col-md-12 col-lg-12">
+          <!-- links at the bottom of the page that redirect users who are lost -->
+      <p>This project was developed in partnership with the <a href="https://epics.ecn.purdue.edu/pharm/" >Purdue EPICS Pharmacy Team</a></p>
+          <p> <a href="https://www.purdue.edu/rx/">Purdue University Retail Pharmacy</a> |
+       <a href="http://www.purdue.edu/"> Purdue University </a> |
+       <a href="https://www.pharmacy.purdue.edu/"> Purdue University College of Pharmacy </a> </p>
+    </div>
 
 
   </div>

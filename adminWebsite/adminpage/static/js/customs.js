@@ -14,7 +14,7 @@ function getRadioVal(form, name) {
     return val; // return value of checked radio or undefined if none checked
 }
 
-$(document).on('click', '.panel-heading span.clickable', function(e){
+$(document).on('click', '.collapsable', function(e){
     var $this = $(this);
     var $collapsing = $this.find('i').hasClass('glyphicon-chevron-down');
     if(!$collapsing) {
@@ -24,7 +24,12 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
         $this.parents('.panel').find('.panel-body').slideDown(150);
         $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
     }
-})
+});
+
+$(document).on('click', '.deleteButton', function(){
+    var result = confirm("Are you sure to continue?");
+    return result;
+});
 
 function getCookie(name) {
     var cookieValue = null;

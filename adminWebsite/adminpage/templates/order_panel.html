@@ -1,43 +1,83 @@
-<div class="container content">
+
+<div class="container content" style="margin-bottom: 30px; margin-top: -25px;">
   <div class="row">
     <div class="col col-lg-15 col-md-15">
       <div class="panel panel-default col-md-13 col-lg-13">
-        <div class="panel-heading">
+        <div class="panel-heading collapsable">
           <h3>
             <span class="pull-left">{{ status_name }}</span>
-            <span class="pull-right clickable order-span"><i class="glyphicon glyphicon-chevron-{{ p_direction }}"></i></span>
+            <span class="pull-right clickable order-span">
+              <span class="badge" style="font-size: 14px; margin-bottom: -15px; background-color:#AF8020; margin-right: 20px;">
+                {{orders.count}} orders
+              </span>
+              <i class="glyphicon glyphicon-chevron-{{ p_direction }}"></i>
+            </span>
           </h3>
         </div>
         <div class="panel-body"><br>
-
-          <table class="table table-hover" style="margin-bottom:3px;">
+          
+          <table class="table table-hover tablesorter" style="margin-top:-10px;">
+            <thead>
             <tr>
-              <th>Customer Name</th>
-              <th>Date Submitted</th>
-              <th>Order Number</th>
+              <th class="header">Customer Name</th>
+              <th class="header">Date Submitted</th>
+              <th class="header">Order Number</th>
             </tr>
-
+            </thead>
+            <tbody>
             {% if orders %}
               {% for order in orders %}
 
+              {% if pager %}
+              <tr onclick="window.location='{% url 'adminpage:admin_orderDetail' order.pk %}'" class="notHeader filtered">
+              {% else %}
               <tr onclick="window.location='{% url 'adminpage:admin_orderDetail' order.pk %}'" class="notHeader">
-                <td>{{order.client_obj.client_name}}</td>
-                <td>{{order.date_time}}</td>
-                <td>No. # {{order.pk|stringformat:"09d"}}</td>
+              {% endif %}
+                <td width="30%">{{order.client_obj.first_name}} {{order.client_obj.last_name}}</td>
+                <td width="40%">{{order.date_time|date:"m.d/y P"}}</td>
+                <td width="30%">No. # {{order.pk|stringformat:"09d"}}</td>
               </tr>
 
               {% endfor %}
-            
-            {% endif %}
-            <tr>
-              <td width="30%"></td>
-              <td width="40%"></td>
-              <td width="30%"></td>
-            </tr>
-          </table>
 
+            {% endif %}
+            </tbody>
+
+          </table>
+          {% if pager %}
+            
+          <div id="pager">
+            <form style="cursor:pointer;">
+                <i class="glyphicon glyphicon-fast-backward first" style="color:#AF8020;cursor:pointer;"></i>
+                <i class="glyphicon glyphicon-backward prev" style="color:#AF8020;cursor:pointer;"></i>
+                <input type="text" class="pagedisplay" readonly/>
+                <i class="glyphicon glyphicon-forward next" style="color:#AF8020;cursor:pointer;"></i>
+                <i class="glyphicon glyphicon-fast-forward last" style="color:#AF8020;cursor:pointer;"></i>
+                <select class="pagesize" style="cursor:pointer;">
+                    <option selected="selected"  value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option  value="40">40</option>
+                </select>
+            </form>
+          </div>
+
+          {% endif %}
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+<style type="text/css">
+.tablesorter .filtered {
+  display: none;
+}
+
+.tablesorter th {
+  border-bottom: 1px solid #ddd;
+
+}
+
+</style>

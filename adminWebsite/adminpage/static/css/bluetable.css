@@ -1,0 +1,22 @@
+/* tables */
+
+.tablesorter-header {
+	background-image: url(../img/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+
+.tablesorter-headerAsc {
+	background-image: url(../img/asc.gif);
+    background-color: #F0F8FF;
+}
+.tablesorter-headerDesc {
+	background-image: url(../img/desc.gif);
+    background-color: #F0F8FF;
+}
+
+table.tablesorter thead th {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd !important;
+}

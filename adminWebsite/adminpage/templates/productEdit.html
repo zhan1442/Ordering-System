@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block manage_active %}active{% endblock %}
+{% block title_name %}productEdit{% endblock %}
+{% block head %}
+
+  {% if product %}
+    Product: {{product.name}}
+    <form method="post" action="{% url 'adminpage:admin_productDelete' product.pk %}" style="display: inline-block; margin-bottom: 10px;" class="pull-right">
+      <button class="deleteButton btn btn-danger btn-md">{% csrf_token %}
+        <span class="glyphicon glyphicon-minus-sign"></span> Delete Product from Inventory
+      </button>
+    </form>
+  {% else %}
+    New Product
+  {% endif %}
+
+{% endblock %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="container" style="margin-top:-12px; padding-left:5px;">
+  <h5>
+    <a href="{% url 'adminpage:admin_manageProducts' %}">&nbsp;Manage Product</a>
+    &nbsp;>&nbsp; Product Detail&emsp;&emsp;
+    <a href="{% url 'adminpage:admin_manageProducts' %}"><i class='glyphicon glyphicon-arrow-left'></i>&nbsp;Back</a>
+  </h5>
+</div>
+<br>
+
+<div class="container content">
+<div class="row">
+<div class="col col-lg-15 col-md-15">
+  <div class="panel panel-default col-md-13 col-lg-13 ">
+    <div class="panel-heading">
+      <h3>
+        <span class="pull-left" style="font-size: 18px;">
+          <i class='glyphicon glyphicon-tag' style="margin-right: 10px;"></i>
+          {% if product %}
+            Change Here
+          {% else %}
+            Create Here
+          {% endif %}
+        </span>
+      </h3>
+    </div>
+    <div class="panel-body"><br>
+      {% if product %}
+      <div class="container content">
+        <div class="alert alert-warning alert-dismissable fade in" style="margin-left: 15px; margin-right: 15px;">
+          <p><strong>Created: </strong> &nbsp;Product was add to inventory at &nbsp;<u>{{product.date_time}}</u></p>
+          {% ifnotequal product.date_time|timesince product.modified_time|timesince %}
+            <p><strong>Last Update: </strong> &nbsp;Product was last modified &nbsp;<u>{{product.modified_time|timesince}}</u>&nbsp; ago</p>
+          {% endifnotequal %}
+        </div>
+      </div><br>
+      {% endif %}
+
+      {% csrf_token %}
+      {% crispy form %}
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<style type="text/css">
+  .help-block {
+    font-size: 13px;
+    color: #888;
+  }
+  legend {
+    font-size: 18px;
+  }
+</style>
+
+{% endblock body %}
+

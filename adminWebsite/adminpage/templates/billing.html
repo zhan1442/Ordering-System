@@ -2,12 +2,28 @@
 
 {% block billing_active %}active{% endblock %}
 {% block title_name %}Billing Page{% endblock %}
-{% block head %}Billing/Invoicing{% endblock %}
+{% block head %}Billing / Invoicing{% endblock %}
 
 {% block body %}
+<div class="container content">
+<div class="row" >
+  <h5 style="font-size: 16px;">
+    Pending Orders &emsp; <i class='glyphicon glyphicon-chevron-right'></i> &emsp; 
+    <span style="color: #AF8020;">Billing Orders</span> &emsp; <i class='glyphicon glyphicon-chevron-right'></i> &emsp; 
+    Archive Orders &emsp;
+    <span class="pull-right">
+      <a href="{% url 'adminpage:admin_home' %}">
+        Pending&emsp;<i class='glyphicon glyphicon-arrow-left'></i></a>&emsp;&emsp;
+      <a href="{% url 'adminpage:admin_archive' %}">
+        <i class='glyphicon glyphicon-arrow-right'></i>&emsp;Archive
+      </a>
+    </span>
+  </h5>
+</div>
+</div>
 <br><br>
 
-{% include 'searchbar.html' %}
+{% include 'searchbar.html' %}<br>
 
 {% include 'order_panel.html' with status_name="Order Delivered" orders=billing_orders p_direction="up" only %}
 

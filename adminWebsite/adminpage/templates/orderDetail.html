@@ -1,21 +1,39 @@
 {% extends "base.html" %}
 
 {% block title_name %}Order detail{% endblock %}
-{% block head %}Order #{{order.pk|stringformat:"09d"}}{% endblock %}
+{% block head %}Order #{{order.pk|stringformat:"09d"}}
+  {% if order.status == "complete" %}&emsp;
+    <span style="color:red;font-size:22px;border-style:solid;border-width:2px;border-color:red;border-radius:6%;"> 
+      Completed
+    </span>
+  {% endif %}
+  
+  <form method="post" action="{% url 'adminpage:admin_orderRevise' order.pk %}" style="display: inline-block; margin-bottom: 10px;" class="pull-right">
+    <button class="deleteButton btn btn-danger btn-md">{% csrf_token %}
+      <span class="glyphicon glyphicon-minus-sign"></span> Delete Order
+    </button>
+  </form>
+
+{% endblock %}
 
 {% block body %}
 
 <div class="container" style="margin-top:-12px; padding-left:5px;">
   <h5>
-
     {% if order.status == "billing" %}
-      <a href="{% url 'adminpage:admin_billing' %}">Billing Orders</a>
+      <a href="{% url 'adminpage:admin_billing' %}">&nbsp;Billing Orders</a>
+      &nbsp;>&nbsp; Order Detail&emsp;&emsp;
+      <a href="{% url 'adminpage:admin_billing' %}"><i class='glyphicon glyphicon-arrow-left'></i>&nbsp;Back</a>
     {% else %}{% if order.status == "complete" %}
-      <a href="{% url 'adminpage:admin_archive' %}">Order Archive</a>
+      <a href="{% url 'adminpage:admin_archive' %}">&nbsp;Order Archive</a>
+      &nbsp;>&nbsp; Order Detail&emsp;&emsp;
+      <a href="{% url 'adminpage:admin_archive' %}"><i class='glyphicon glyphicon-arrow-left'></i>&nbsp;Back</a>
     {% else %}
-      <a href="{% url 'adminpage:admin_home' %}">Pending Orders</a>
+      <a href="{% url 'adminpage:admin_home' %}">&nbsp;Pending Orders</a>
+      &nbsp;>&nbsp; Order Detail&emsp;&emsp;
+      <a href="{% url 'adminpage:admin_home' %}"><i class='glyphicon glyphicon-arrow-left'></i>&nbsp;Back</a>
     {% endif %}{% endif %}
-     &nbsp;>&nbsp; Order Detail
+
   </h5>
 </div>
 <br>
@@ -25,7 +43,10 @@
 
 <div class="container content">
   <div class="alert alert-warning alert-dismissable fade in">
-    <strong>Last Update: </strong> Order status was changed to {{order.get_status_display}}
+    <p><strong>Created: </strong>Order was add to inventory at &nbsp;<u>{{order.date_time}}</u></p>
+    {% ifnotequal order.date_time|timesince order.modified_time|timesince %}
+      <p><strong>Last Update: </strong>Order Status was last modified &nbsp;<u>{{order.modified_time|timesince}}</u>&nbsp; ago</p>
+    {% endifnotequal %}
   </div>
 </div>
 
@@ -70,8 +91,11 @@
 
         <div class="panel-heading"><h4><center>Order Info</center></h4></div>
         <div class="panel-body">
-          <p><strong>Customer Name:</strong> {{order.client_obj.client_name}}</p>
-          <strong>Order Number:</strong> #{{order.pk|stringformat:"09d"}} &nbsp; | &nbsp; 
+          <p>
+            <strong>Customer Name:</strong> {{order.client_obj.first_name}} {{order.client_obj.last_name}}
+            &nbsp; | &nbsp; <strong>Email:</strong> {{order.client_obj.email}}
+          </p>
+          <strong>Order Number:</strong> # {{order.pk|stringformat:"09d"}} &nbsp; &nbsp; &nbsp; | &nbsp; 
           <strong>Submit Time:</strong> {{order.date_time}}
         </div>
 
@@ -80,9 +104,9 @@
           <tr>
             <th>Brand Name</th>
             <th>Generic Name</th>
-            <th>Package Quantity</th>
+            <th>Package</th>
             <th>Quantity</th>
-            <th>Price</th>
+            <!--<th>Price</th>-->
           </tr>
 
           {% if drug_set %}
@@ -93,23 +117,28 @@
                 <td>{{drug.name}}</td>
                 <td>{{drug.strength}}</td>
                 <td>{{drug.quantity}}</td>
-                <td>$xx.xx</td>
+                <!--<td>$xx.xx</td>-->
             </tr>
             {% endfor %}
 
           {% else %}
             <tr>
-              <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+              <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
             </tr>
           {% endif %}
 
           <tr>
-            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-            <td>Total:</td>
-            <td>$xx.xx</td>
+            <td>&nbsp;</td><td>&nbsp;</td>
+            <td><span class="pull-right">Total:</span></td>
+            <td>{{total_q}}</td>
           </tr>
           <tr>
-            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+            <tr>
+              <td width="25%"></td>
+              <td width="25%"></td>
+              <td width="25%"></td>
+              <td width="20%"></td>
+            </tr>
           </tr>
         </table>
         </div>
@@ -136,7 +165,7 @@
 
   $('#statusForm').submit(function() {
 
-    var result = confirm("Click OK to continue?");
+    var result = confirm("Are you sure to continue?");
     if (result == true) {
       if ("{{order.status}}" == getRadioVal(document.getElementById("statusForm"), "status")) {
         $('#notifications').prepend(

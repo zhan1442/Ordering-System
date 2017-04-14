@@ -1,0 +1,100 @@
+
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+
+<table>
+
+  <thead>
+    <tr>
+      <th colspan="5">Order Drug List</th>
+    </tr>
+    <tr>
+      <th>Brand</th>
+      <th>Name</th>
+      <th>Strength</th>
+      <th>Quantity</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for drug in drug_set %}
+
+    <tr class="item">
+      <td>{{drug.brand}}</td>
+      <td>{{drug.name}}</td>
+      <td>{{drug.strength}}</td>
+      <td>
+        <span class="revision" data-pk="{{drug.pk}}" data-name="quantity" data-type="number">{{drug.quantity}}</span>
+        <i class="material-icons" style="color: #aaa; vertical-align: middle;">edit</i>
+      </td>
+      <td>
+        <center><i class="material-icons button delete btnremove" data-pk="{{drug.pk}}">delete</i></center>
+      </td>
+    </tr>
+    
+  {% endfor %}
+
+  </tbody>
+</table>
+
+
+
+<style type="text/css">
+
+table {
+  text-align: center;
+  line-height: 40px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 2px solid rgba(175, 128, 32, .7);
+  max-width: 800px;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: .25rem;
+  background: rgba(255, 255, 255, .5);
+}
+
+thead tr:first-child {
+  background: rgba(175, 128, 32, .7);
+  color: #000;
+  border: none;
+}
+
+th:first-child,
+td:first-child {
+  padding: 0 15px 0 20px;
+}
+
+thead tr:last-child th {
+  border-bottom: 3px solid #ddd;
+}
+
+tbody tr:hover {
+  background-color: rgba(176, 196, 222, .1);
+  cursor: default;
+}
+
+tbody tr:last-child td {
+  border: none;
+}
+
+tbody td {
+  border-bottom: 1px solid #ddd;
+}
+
+td:last-child {
+  text-align: right;
+  padding-right: 10px;
+}
+
+.button {
+  color: #aaa;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.delete:hover {
+  color: #dc2a2a;
+}
+
+</style>

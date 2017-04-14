@@ -3,12 +3,60 @@
 {% block archive_active %}active{% endblock %}
 {% block title_name %}Archive Page{% endblock %}
 {% block head %}Order Archive{% endblock %}
+{% block more_style %}
+    
+{% endblock %}
 
 {% block body %}
+
+<div class="container content">
+<div class="row" >
+  <h5 style="font-size: 16px;">
+    Pending Orders &emsp; <i class='glyphicon glyphicon-chevron-right'></i> &emsp; 
+    Billing Orders &emsp; <i class='glyphicon glyphicon-chevron-right'></i> &emsp; 
+    <span style="color: #AF8020;">Archive Orders</span> &emsp;
+    <span class="pull-right">
+      <a href="{% url 'adminpage:admin_billing' %}">
+        Billing&emsp;<i class='glyphicon glyphicon-arrow-left'></i></a>&emsp;&emsp;
+    </span>
+  </h5>
+</div>
+</div>
+
 <br><br>
 
-{% include 'searchbar.html' %}
+<!--{% include 'searchbar.html' %}<br>-->
 
-{% include 'order_panel.html' with status_name="Billing Complete" orders=archive_orders p_direction="up" only %}
+
+{% load static %}
+
+<script type="text/javascript" src="{% static 'js/jquery.tablesorter.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.tablesorter.widgets.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/jquery.tablesorter.pager.js' %}"></script>
+<script type="text/javascript">
+$(function() {
+        $("table")
+            .tablesorter({
+                          widthFixed: true, 
+                          widgets: ['filter'],
+                          widgetOptions : {
+                            // include column filters
+                            filter_columnFilters : true,
+                            filter_ignoreCase : true,
+                            filter_liveSearch : true,
+                            filter_filteredRow : 'filtered',
+                            filter_hideFilters : true,
+                            filter_hideEmpty : true,
+                            filter_searchDelay : 150,
+                            filter_startsWith : false,
+                          }
+                        })
+            .tablesorterPager({positionFixed: false, container: $("#pager")});
+});
+</script>
+
+<br>
+{% include 'order_panel.html' with status_name="Billing Complete" orders=archive_orders p_direction="up" pager="yes" only %}
 
 {% endblock %}

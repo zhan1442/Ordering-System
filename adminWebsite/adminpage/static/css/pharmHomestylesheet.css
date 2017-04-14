@@ -144,6 +144,10 @@ table th,tr{
   color: #AF8020; 
 }
 
+.collapsable {
+  cursor: pointer; 
+}
+
 .dropdown-menu li{
   cursor: pointer;
 }
@@ -186,3 +190,53 @@ tr.notHeader:hover{
   text-decoration:underline;
   cursor: pointer;
 }
+
+/* product page */
+
+.btn-group-justified button {
+  border-left-width: 0px;
+  background-color: #ffffff;
+  height: 35px;
+  font-size: 12px;
+}
+
+.btn-group-justified button:hover {
+  background-color: #AF8020;
+  font-size: 17px;
+}
+
+/*form*/
+.form-horizontal fieldset {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+
+/*#azsidebar {
+  display: none;
+  position: fixed;
+  width: 40px;
+  z-index: 10;
+  text-align: center;
+}
+
+.azlist {
+  position: relative;
+  z-index: 123;
+  background-color: #ffffff;
+  border: 1px solid #e5e9ef;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.n-i {
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.n-i:hover {
+  background-color: #AF8020;
+  font-size: 20px;
+}*/

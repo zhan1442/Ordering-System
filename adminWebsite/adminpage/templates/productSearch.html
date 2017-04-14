@@ -1,0 +1,67 @@
+<div class="container content">
+  <div class="row">
+    <div class="input-group col-md-12">
+      <span class="input-group-btn">
+        <button class="btn" style="background-color:#AF8020; cursor:default;">
+          <span class="glyphicon glyphicon-search" style="color:white;"></span>
+        </button>
+      </span>
+      <input id="qfield" type="text" class="search-query form-control" placeholder=" Select some starting letter, then enter the Drug Name to search.." />
+      <span class="input-group-btn">
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color:#AF8020;">
+              &nbsp;&nbsp;<span id="filterOption" style="color:white;">By Brand</span>&nbsp;&nbsp;
+              <span class="caret" style="color:white;"></span>
+            </button>
+            <ul class="dropdown-menu" >
+              <li><a id="bybrand">By Brand</a></li>
+              <li><a id="byname">By Name</a></li>
+              <li><a id="byCIN">&nbsp;&nbsp;By CIN&nbsp;&nbsp;</a></li>
+            </ul>
+          </div>
+      </span>
+    </div>
+  </div>
+</div>
+<br>
+
+<script type="text/javascript">
+
+  $(document).on('click', 'ul.dropdown-menu a', function(e){
+    $('#filterOption').text($(this).text());
+    var tag = "Product Brand"
+    if ($('#filterOption').text() == $('#byCIN').text()) {
+      tag = "Product CIN digits"
+    } else if ($('#filterOption').text() == $('#byname').text()) {
+      tag = "Product Name"
+    }
+    holder = " Select some starting letter, then enter the " + tag + " to search.."
+    $('#qfield').attr('placeholder', holder);
+  });
+
+  $(document).on('keyup', '#qfield', function(){
+    var q = $(this).val().toUpperCase();
+
+    $('.panel-heading span.order-span i.glyphicon-chevron-down').each(function() {
+      var $this = $(this);
+      $this.parents('.panel').find('.panel-body').slideDown(150);
+      $this.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+    });
+
+    $('table tr.producttr').each(function(index) {
+      var $this = $(this);
+      
+      var id = $this.find("td:eq(0)").text().toUpperCase();
+      if ($('#filterOption').text() == $('#byCIN').text()) {
+        id = $this.find("td:eq(3)").text().toUpperCase();
+      } else if ($('#filterOption').text() == $('#byname').text()) {
+        id = $this.find("td:eq(1)").text().toUpperCase();
+      }
+
+      if (id.indexOf(q) > -1) $this.show();
+      else $this.hide();
+    });
+
+  });
+
+</script>
