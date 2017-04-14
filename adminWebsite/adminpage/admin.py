@@ -63,7 +63,7 @@ class CustomUserAdmin(UserAdmin):
         form = super(CustomUserAdmin, self).get_form(request, obj, **kwargs)
         if 'user_permissions' in form.base_fields:
             permissions = form.base_fields['user_permissions']
-            permissions.queryset = permissions.queryset.filter(content_type__model__in=['user'])
+            permissions.queryset = permissions.queryset.filter(content_type__model__in=['user', 'profile'])
         return form
 
     # inline the profile field...
