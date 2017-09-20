@@ -1,6 +1,6 @@
 # Ordering-System
 The ordering system to streamline the drug ordering process for purdue pharmacy.
-This is the early stage prototype implementing the design for Visual Team to visualize the functionality with the source code.
+This is the prototype ordering web system implementing the design.
 
 The temporary website is now hosted on the determined EC2 sever, with the link:
 
